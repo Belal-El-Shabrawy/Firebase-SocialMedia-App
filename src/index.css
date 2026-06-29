@@ -1,0 +1,328 @@
+/* ==========================================================================
+   1. GLOBAL STYLES & VARIABLES
+   ========================================================================== */
+:root {
+  --primary-color: #5c54e5;
+  --primary-hover: #4a42cd;
+  --bg-color: #f8f9fd;
+  --card-bg: #ffffff;
+  --text-main: #2d3142;
+  --text-muted: #7c8097;
+  --error-color: #fa5252;
+  --border-color: #e6e8f0;
+  --like-color: #4c6ef5;
+  --unlike-color: #fa5252;
+  --shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   2. NAVBAR COMPONENT (`NavBar.tsx`)
+   ========================================================================== */
+.navbar {
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 65px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(92, 84, 229, 0.2);
+}
+
+.navbar .links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar .links a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+  padding: 0.5rem 0;
+}
+
+.navbar .links a:hover {
+  color: #ffffff;
+}
+
+.navbar .user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar .user p {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.navbar .user img {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  width: 32px;
+  height: 32px;
+}
+
+.navbar .logout-btn {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar .logout-btn:hover {
+  background-color: #ffffff;
+  color: var(--primary-color);
+}
+
+/* ==========================================================================
+   3. LAYOUT CONTAINERS & GENERIC CARDS
+   ========================================================================== */
+.page-container, 
+.create-post-page, 
+.login-page {
+  max-width: 700px;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.card h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.card h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   4. POST CARD COMPONENT (`post.tsx`)
+   ========================================================================== */
+.page-container .card > div > div {
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.page-container .card > div > div:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.page-container .user {
+  margin-bottom: 0.75rem;
+}
+
+.page-container .user p {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.page-container .title h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0;
+}
+
+.page-container .title h1::after {
+  display: none; /* Hide the generic line indicator inside cards */
+}
+
+.page-container .body p {
+  color: var(--text-main);
+  line-height: 1.6;
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+  white-space: pre-wrap; /* Preserves line breaks */
+}
+
+.page-container .footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.page-container .footer button {
+  background: none;
+  border: 1px solid var(--border-color);
+  font-size: 1.1rem;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background-color: #f1f3f5;
+}
+
+.page-container .footer button:hover {
+  transform: scale(1.05);
+  background-color: #e9ecef;
+}
+
+.page-container .footer p {
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   5. FORMS & INPUTS (`CreateForm.tsx`)
+   ========================================================================== */
+.form-card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: #fafbfc;
+  font-size: 1rem;
+  color: var(--text-main);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--primary-color);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(92, 84, 229, 0.15);
+}
+
+.error-msg {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 0.35rem;
+  margin-bottom: 1rem;
+  min-height: 1.2rem;
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 12px rgba(92, 84, 229, 0.2);
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   6. LOGIN PAGE COMPONENT (`Login.tsx`)
+   ========================================================================== */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 150px);
+}
+
+.login-page .card {
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-page p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+}
+
+.google-btn {
+  background-color: #ffffff;
+  color: #4285f4;
+  border: 1px solid #4285f4;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.google-btn:hover {
+  background-color: #4285f4;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+}
